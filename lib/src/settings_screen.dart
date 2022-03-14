@@ -260,13 +260,14 @@ class SettingsTileGroup extends StatelessWidget {
   final List<Widget> children;
   final String? visibleIfKey;
   final bool visibleByDefault;
+  final TextStyle? textStyle;
 
   SettingsTileGroup({
     required this.title,
     this.subtitle,
     required this.children,
     this.visibleIfKey,
-    this.visibleByDefault = true,
+    this.visibleByDefault = true, this.textStyle,
   });
 
   @override
@@ -306,7 +307,7 @@ class SettingsTileGroup extends StatelessWidget {
       elements.addAll([
         Container(
           padding: const EdgeInsets.all(16.0),
-          child: Align(alignment: Alignment.centerLeft, child: Text(subtitle!)),
+          child: Align(alignment: Alignment.centerLeft, child: Text(subtitle!, style: textStyle,)),
         ),
         _SettingsTileDivider(),
       ]);
@@ -330,6 +331,7 @@ class _SettingsTile extends StatefulWidget {
   final String? enabledIfKey;
   final bool visibleByDefault;
   final Function? onTap;
+  final TextStyle? textStyle;
 
   _SettingsTile({
     required this.title,
@@ -343,6 +345,7 @@ class _SettingsTile extends StatefulWidget {
     this.enabledIfKey,
     this.visibleByDefault = true,
     this.onTap,
+    this.textStyle,
   });
 
   @override
@@ -419,7 +422,7 @@ class __SettingsTileState extends State<_SettingsTile>
 
   Widget? _buildSubtitle() {
     Widget? subtitleWidget =
-        widget.subtitle != null ? Text(widget.subtitle!) : null;
+        widget.subtitle != null ? Text(widget.subtitle!,style: widget.textStyle,) : null;
     if (widget.child == null) {
       return subtitleWidget;
     }
@@ -1328,6 +1331,7 @@ class SliderSettingsTile extends StatefulWidget {
   final String? confirmModalTitle;
   final String? confirmModalCancelCaption;
   final String? confirmModalConfirmCaption;
+  final TextStyle? textStyle;
 
   SliderSettingsTile({
     required this.settingKey,
@@ -1348,7 +1352,7 @@ class SliderSettingsTile extends StatefulWidget {
     this.confirmTextToDisable,
     this.confirmModalTitle,
     this.confirmModalCancelCaption,
-    this.confirmModalConfirmCaption,
+    this.confirmModalConfirmCaption, this.textStyle,
   });
 
   @override
@@ -1393,7 +1397,7 @@ class _SliderSettingsTileState extends State<SliderSettingsTile>
                 onChanged: _onChanged,
                 enabled: enabled,
                 leading: widget.minIcon ?? Container(),
-                trailing: widget.maxIcon ?? Text(_getStringValue()),
+                trailing: widget.maxIcon ?? Text(_getStringValue(), style: widget.textStyle,),
               ),
             );
           },
@@ -1709,6 +1713,7 @@ class RadioPickerSettingsTile extends StatelessWidget {
   final String? visibleIfKey;
   final String? enabledIfKey;
   final bool visibleByDefault;
+
 
   RadioPickerSettingsTile({
     required this.settingKey,
