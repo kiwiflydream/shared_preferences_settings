@@ -1093,6 +1093,7 @@ class RadioSettingsTile extends StatefulWidget {
   final String? confirmModalTitle;
   final String? confirmModalCancelCaption;
   final String? confirmModalConfirmCaption;
+  final TextStyle? textStyle;
 
   RadioSettingsTile({
     required this.settingKey,
@@ -1112,6 +1113,7 @@ class RadioSettingsTile extends StatefulWidget {
     this.confirmModalTitle,
     this.confirmModalCancelCaption,
     this.confirmModalConfirmCaption,
+    this.textStyle,
   });
 
   @override
@@ -1183,7 +1185,7 @@ class _RadioSettingsTileState extends State<RadioSettingsTile>
     List<Widget> elements = <Widget>[];
     widget.values.forEach((optionKey, optionName) {
       elements.add(_SimpleRadioSettingsTile(
-        title: Text(optionName),
+        title: Text(optionName, style: widget.textStyle),
         value: optionKey,
         groupValue: groupValue,
         onChanged: _onChanged,
@@ -1824,6 +1826,7 @@ class TextFieldModalSettingsTile extends StatelessWidget {
   final String? enabledIfKey;
   final bool visibleByDefault;
   final bool obscureText;
+  final TextStyle? textStyle;
 
   TextFieldModalSettingsTile({
     required this.settingKey,
@@ -1838,6 +1841,7 @@ class TextFieldModalSettingsTile extends StatelessWidget {
     this.enabledIfKey,
     this.visibleByDefault = true,
     this.obscureText = false,
+    this.textStyle,
   });
 
   @override
@@ -1861,6 +1865,7 @@ class TextFieldModalSettingsTile extends StatelessWidget {
           onChanged(_controller.text);
         });
         return TextFormField(
+          style: textStyle,
           autofocus: true,
           controller: _controller,
           keyboardType: keyboardType,
