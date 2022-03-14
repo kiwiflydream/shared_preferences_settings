@@ -46,7 +46,7 @@ import 'settings.dart';
 /// );
 ///
 class SettingsScreen extends StatelessWidget {
-  final String title;
+  final Text title;
   final List<Widget> children;
   final String? confirmText;
   final String? confirmModalTitle;
@@ -70,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: appBarBackgroundColor,
-          title: Text(title),
+          title: title,
         ),
         body: ListView.builder(
           itemCount: children.length,
@@ -152,9 +152,9 @@ class SettingsScreen extends StatelessWidget {
 class SettingsToggleScreen extends StatelessWidget {
   final String settingKey;
   final bool defaultValue;
-  final String title;
-  final String subtitle;
-  final String subtitleIfOff;
+  final Text title;
+  final Text subtitle;
+  final Text subtitleIfOff;
   final List<Widget> children;
   final List<Widget>? childrenIfOff;
   final String? confirmText;
@@ -170,8 +170,8 @@ class SettingsToggleScreen extends StatelessWidget {
     required this.children,
     this.childrenIfOff,
     this.defaultValue = false,
-    this.subtitle = "On",
-    this.subtitleIfOff = "Off",
+    this.subtitle = const Text("On"),
+    this.subtitleIfOff = const Text("Off"),
     this.confirmText,
     this.confirmTextToEnable,
     this.confirmTextToDisable,
@@ -255,7 +255,7 @@ class SettingsToggleScreen extends StatelessWidget {
 /// );
 ///
 class SettingsTileGroup extends StatelessWidget {
-  final String title;
+  final Text title;
   final String? subtitle;
   final List<Widget> children;
   final String? visibleIfKey;
@@ -289,14 +289,15 @@ class SettingsTileGroup extends StatelessWidget {
         padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 22.0),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            title.toUpperCase(),
-            style: TextStyle(
-              color: Theme.of(context).accentColor,
-              fontSize: 12.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // child: Text(
+          //   title.toUpperCase(),
+          //   style: TextStyle(
+          //     color: Theme.of(context).accentColor,
+          //     fontSize: 12.0,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          child: title,
         ),
       ),
     ];
@@ -318,7 +319,7 @@ class SettingsTileGroup extends StatelessWidget {
 }
 
 class _SettingsTile extends StatefulWidget {
-  final String? title;
+  final Text? title;
   final String? subtitle;
   final Icon? icon;
   final Widget? leading;
@@ -395,7 +396,7 @@ class __SettingsTileState extends State<_SettingsTile>
       children: <Widget>[
         ListTile(
           leading: widget.icon ?? widget.leading,
-          title: Text(widget.title!),
+          title: widget.title!,
           subtitle: _buildSubtitle(),
           onTap: _shouldDisableTap(enabled)
               ? null
@@ -479,7 +480,7 @@ class __SettingsTileState extends State<_SettingsTile>
 ///	  ],
 /// );
 class ExpansionSettingsTile extends StatelessWidget {
-  final String title;
+  final Text title;
   final Icon? icon;
   final List<Widget> children;
   final String? visibleIfKey;
@@ -511,7 +512,7 @@ class ExpansionSettingsTile extends StatelessWidget {
 
   Widget _buildChild(BuildContext context) {
     return ExpansionTile(
-      title: Text(title),
+      title: title,
       children: children,
       leading: icon,
       initiallyExpanded: initiallyExpanded,
@@ -568,7 +569,7 @@ class _SettingsTileDivider extends StatelessWidget {
 ///   ),
 /// );
 class SimpleSettingsTile extends StatelessWidget {
-  final String title;
+  final Text title;
   final String? subtitle;
   final Icon? icon;
   final Widget? screen;
@@ -699,7 +700,7 @@ class SimpleSettingsTile extends StatelessWidget {
 /// );
 class CheckboxSettingsTile extends StatefulWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final bool defaultValue;
   final String? subtitle;
   final String? subtitleIfOff;
@@ -905,7 +906,7 @@ class _CheckboxSettingsTileState extends State<CheckboxSettingsTile>
 class SwitchSettingsTile extends StatefulWidget {
   final String settingKey;
   final bool defaultValue;
-  final String title;
+  final Text title;
   final String? subtitle;
   final String? subtitleIfOff;
   final Icon? icon;
@@ -1076,7 +1077,7 @@ class _SwitchSettingsTileState extends State<SwitchSettingsTile>
 /// );
 class RadioSettingsTile extends StatefulWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final Map<String, String> values;
   final defaultKey;
   final String? subtitle;
@@ -1182,7 +1183,7 @@ class _RadioSettingsTileState extends State<RadioSettingsTile>
     List<Widget> elements = <Widget>[];
     widget.values.forEach((optionKey, optionName) {
       elements.add(_SimpleRadioSettingsTile(
-        title: optionName,
+        title: Text(optionName),
         value: optionKey,
         groupValue: groupValue,
         onChanged: _onChanged,
@@ -1220,7 +1221,7 @@ class _RadioSettingsTileState extends State<RadioSettingsTile>
 }
 
 class _SimpleRadioSettingsTile extends StatelessWidget {
-  final String? title;
+  final Text? title;
   final String value;
   final String? groupValue;
   final ValueChanged<String?> onChanged;
@@ -1307,7 +1308,7 @@ class _SimpleRadioSettingsTile extends StatelessWidget {
 /// );
 class SliderSettingsTile extends StatefulWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final double defaultValue;
   final double minValue;
   final double maxValue;
@@ -1431,7 +1432,7 @@ class _SliderSettingsTileState extends State<SliderSettingsTile>
 class _ModalSettingsTile extends StatefulWidget {
   final String settingKey;
   final String? defaultValue;
-  final String title;
+  final Text title;
   final String? subtitle;
   final Icon? icon;
   final Widget? leading;
@@ -1579,7 +1580,7 @@ class __ModalSettingsTileState extends State<_ModalSettingsTile>
 }
 
 class _SettingsModal extends StatefulWidget {
-  final String title;
+  final Text title;
   final Widget? Function(String?, void Function(String?)) buildChild;
   final String? initialValue;
   final ValueChanged<String?> onSelected;
@@ -1613,7 +1614,7 @@ class __SettingsModalState extends State<_SettingsModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.title),
+      title: widget.title,
       content: widget.buildChild(value, _onChanged),
       actions: <Widget>[
         TextButton(
@@ -1696,7 +1697,7 @@ class __SettingsModalState extends State<_SettingsModal> {
 /// );
 class RadioPickerSettingsTile extends StatelessWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final String? subtitle;
   final Map<String, String> values;
   final String? defaultKey;
@@ -1744,7 +1745,7 @@ class RadioPickerSettingsTile extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               String key = values.keys.toList()[index];
               return _SimpleRadioSettingsTile(
-                title: values[key],
+                title: Text(values[key] ?? ""),
                 value: key,
                 groupValue: value,
                 onChanged: onChanged,
@@ -1812,7 +1813,7 @@ class RadioPickerSettingsTile extends StatelessWidget {
 
 class TextFieldModalSettingsTile extends StatelessWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final String? subtitle;
   final String? defaultValue;
   final Icon? icon;
@@ -1896,7 +1897,7 @@ class _ColorWidget {
 
 class _ColorPickerSettingsTile extends StatelessWidget with _ColorWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final String? subtitle;
   final String? defaultValue;
   final Icon? icon;
@@ -2027,7 +2028,7 @@ class _ColorPickerSettingsTile extends StatelessWidget with _ColorWidget {
 /// );
 class SimpleColorPickerSettingsTile extends StatelessWidget with _ColorWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final String? subtitle;
   final String? defaultValue;
   final Icon? icon;
@@ -2151,7 +2152,7 @@ class SimpleColorPickerSettingsTile extends StatelessWidget with _ColorWidget {
 class MaterialColorPickerSettingsTile extends StatelessWidget
     with _ColorWidget {
   final String settingKey;
-  final String title;
+  final Text title;
   final String? subtitle;
   final String? defaultValue;
   final Icon? icon;
