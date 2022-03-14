@@ -267,7 +267,8 @@ class SettingsTileGroup extends StatelessWidget {
     this.subtitle,
     required this.children,
     this.visibleIfKey,
-    this.visibleByDefault = true, this.textStyle,
+    this.visibleByDefault = true,
+    this.textStyle,
   });
 
   @override
@@ -307,7 +308,12 @@ class SettingsTileGroup extends StatelessWidget {
       elements.addAll([
         Container(
           padding: const EdgeInsets.all(16.0),
-          child: Align(alignment: Alignment.centerLeft, child: Text(subtitle!, style: textStyle,)),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                subtitle!,
+                style: textStyle,
+              )),
         ),
         _SettingsTileDivider(),
       ]);
@@ -421,8 +427,12 @@ class __SettingsTileState extends State<_SettingsTile>
       enabled == false;
 
   Widget? _buildSubtitle() {
-    Widget? subtitleWidget =
-        widget.subtitle != null ? Text(widget.subtitle!,style: widget.textStyle,) : null;
+    Widget? subtitleWidget = widget.subtitle != null
+        ? Text(
+            widget.subtitle!,
+            style: widget.textStyle,
+          )
+        : null;
     if (widget.child == null) {
       return subtitleWidget;
     }
@@ -600,6 +610,7 @@ class SimpleSettingsTile extends StatelessWidget {
       visibleIfKey: visibleIfKey,
       enabledIfKey: enabledIfKey,
       visibleByDefault: visibleByDefault,
+      textStyle: title.style,
     );
   }
 }
@@ -781,6 +792,7 @@ class _CheckboxSettingsTileState extends State<CheckboxSettingsTile>
                 onChanged: _onChanged,
                 enabled: enabled,
               ),
+              textStyle: widget.title.style,
             );
           },
         );
@@ -985,6 +997,7 @@ class _SwitchSettingsTileState extends State<SwitchSettingsTile>
                 onChanged: _onChanged,
                 enabled: enabled,
               ),
+              textStyle: widget.title.style,
             );
           },
         );
@@ -1181,6 +1194,7 @@ class _RadioSettingsTileState extends State<RadioSettingsTile>
             screen: widget.screen,
             visibleIfKey: widget.visibleIfKey,
             visibleByDefault: widget.visibleByDefault,
+            textStyle: widget.title.style,
           );
   }
 
@@ -1250,6 +1264,7 @@ class _SimpleRadioSettingsTile extends StatelessWidget {
         onChanged: onChanged,
         enabled: enabled,
       ),
+      textStyle: title.style,
     );
   }
 }
@@ -1352,7 +1367,8 @@ class SliderSettingsTile extends StatefulWidget {
     this.confirmTextToDisable,
     this.confirmModalTitle,
     this.confirmModalCancelCaption,
-    this.confirmModalConfirmCaption, this.textStyle,
+    this.confirmModalConfirmCaption,
+    this.textStyle,
   });
 
   @override
@@ -1397,8 +1413,13 @@ class _SliderSettingsTileState extends State<SliderSettingsTile>
                 onChanged: _onChanged,
                 enabled: enabled,
                 leading: widget.minIcon ?? Container(),
-                trailing: widget.maxIcon ?? Text(_getStringValue(), style: widget.textStyle,),
+                trailing: widget.maxIcon ??
+                    Text(
+                      _getStringValue(),
+                      style: widget.textStyle,
+                    ),
               ),
+              textStyle: widget.title.style,
             );
           },
         );
@@ -1527,6 +1548,7 @@ class __ModalSettingsTileState extends State<_ModalSettingsTile>
                       _openModal(context, value);
                     }
                   : null,
+              textStyle: widget.title.style,
             );
           },
         );
@@ -1713,7 +1735,6 @@ class RadioPickerSettingsTile extends StatelessWidget {
   final String? visibleIfKey;
   final String? enabledIfKey;
   final bool visibleByDefault;
-
 
   RadioPickerSettingsTile({
     required this.settingKey,
